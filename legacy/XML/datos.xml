@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <patente>ABC123</patente>
+    <vehiculo>Auto nro 1</vehiculo>
+    <nroviaje>123456</nroviaje>
+    <fechaposicion>12/10/2009 23:45:51</fechaposicion>
+    <velocidad>20</velocidad>
+    <velocidadmax>234.4</velocidadmax>
+    <rpm>3500</rpm>
+    <tempmotor>90</tempmotor>
+    <presaceite>7</presaceite>
+    <kmviaje>123567</kmviaje>
+    <kmtotal>120</kmtotal>
+    <porccombustible>0</porccombustible>
+    <consumoviaje>354.5</consumoviaje>
+    <consumototal>130340.7</consumototal>
+    <porcacelerador>100</porcacelerador>
+    <cantfrenado>132</cantfrenado>
+    <chofer>El nombre chofer ?</chofer>
+    <presturbo>50</presturbo>
+    <latitud>-37.987878</latitud>
+    <longitud>-57.658987</longitud>
+    <georeferencia>Estamos en calle nnn</georeferencia>
+    <rumbo>NO</rumbo>
+    <tmpdetenido>000:00:00</tmpdetenido>
+    <tmpmarcha>1432</tmpmarcha>
+    <usocrucero>55</usocrucero>
+    <luces>0</luces>
+    <identidad>7</identidad>
+</root> 

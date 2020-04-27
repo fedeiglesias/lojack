@@ -1,0 +1,301 @@
+body {
+background-image:url('../images/fondo.jpg');
+}
+
+#panel{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -504px;
+    margin-top: -300px;
+    overflow: hidden;
+    width: 1009px;
+    height: 600px;
+}
+
+#panel #tacometro {
+    height:250px;
+    left:178px;
+    overflow:hidden;
+    position:relative;
+    top:-457px;
+    width:250px;
+}
+
+
+#panel #tacometro #pivot-tacometer{
+    position: relative;
+    top: -115px;
+    left: 110px;
+}
+
+#panel #temperature{
+    height:100px;
+    left:72px;
+    overflow:visible;
+    position:relative;
+    top:-583px;
+    width:100px;
+}
+
+#panel #temperature #pivot-temperature{
+    position: relative;
+    top: -58px;
+    left: 41px;
+}
+
+#panel #turbo{
+    height:100px;
+    left:358px;
+    overflow:hidden;
+    position:relative;
+    top:-880px;
+    width:100px;
+}
+
+#panel #turbo #pivot-turbo{
+    position:relative;
+    top: -56px;
+    left: 44px;
+}
+
+#panel #aceite{
+    height:100px;
+    left:455px;
+    overflow:hidden;
+    position:relative;
+    top:-980px;
+    width:100px;
+}
+
+#panel #aceite #pivot-aceite{
+    position:relative;
+    top: -56px;
+    left: 44px;
+}
+
+#panel #acelerator{
+    height:100px;
+    left:550px;
+    overflow:hidden;
+    position:relative;
+    top:-1080px;
+    width:100px;
+}
+
+#panel #acelerator #pivot-acelerator{
+    position:relative;
+    top: -56px;
+    left: 44px;
+}
+
+
+#panel #speedo {
+height:250px;
+left:572px;
+overflow:hidden;
+position:relative;
+top:-1103px;
+width:250px;
+}
+
+
+#panel #speedo #pivot-speedo {
+left:110px;
+position:relative;
+top:-115px;
+}
+
+
+#panel #gasoil{
+    height:110px;
+    left:790px;
+    overflow:hidden;
+    position:relative;
+    top:-1260px;
+    width:110px;
+}
+
+#panel #gasoil #pivot-gasoil{
+    position: relative;
+    top: -25px;
+    left: 85px;
+}
+
+#kilometros-totales {
+    position: relative;
+    top: -1312px;
+    left: 236px;
+    width: 100px;
+    height: 20px;
+}
+
+#kilometros-parciales {
+    position: relative;
+    top: -1348px;
+    left: 637px;
+    width: 100px;
+    height: 35px;
+}
+
+#panel-lcd{
+    position: relative;
+    top: -1524px;
+    left: 450px;
+    width: 103px;
+    height: 170px;
+    overflow: hidden;
+}
+
+#panel-lcd #tiempo-detenido{
+    position: relative;
+    top: -5px;
+    left: 2px;
+    width:100px;
+    height: 40px;
+    overflow: hidden;
+}
+
+#panel-lcd #tiempo-marcha{
+    position: relative;
+    top: -19px;
+    left: 2px;
+    width:100px;
+    height: 40px;
+    overflow: hidden;
+}
+
+#panel-lcd #consumo-viaje{
+    position: relative;
+    top: -33px;
+    left: 2px;
+    width:100px;
+    height: 40px;
+    overflow: hidden;
+}
+
+#panel-lcd #consumo-total{
+    position: relative;
+    top: -46px;
+    left: 2px;
+    width:100px;
+    height: 40px;
+    overflow: hidden;
+}
+
+#panel-lcd #velocidad-pulso{
+    position: relative;
+    top: -59px;
+    left: 2px;
+    width:100px;
+    height: 40px;
+    overflow: hidden;
+}
+
+#panel-lcd #uso-crucero{
+    position: relative;
+    top: -34px;
+    left: 2px;
+    width:100px;
+    height: 40px;
+    overflow: hidden;
+}
+
+#vehiculo{
+    position: relative;
+    top: -1455px;
+    left: 130px;
+    width: 160px;
+    height:30px;
+}
+
+#chofer{
+    position: relative;
+    top: -1437px;
+    left: 130px;
+    width: 160px;
+    height:40px;
+	overflow: hidden;
+}
+
+#patente{
+    position: relative;
+    top: -1412px;
+    left: 130px;
+    width: 160px;
+    height:30px;
+}
+
+#latitud {
+	height:15px;
+	left:840px;
+	position:relative;
+	top:-1595px;
+	width:100px;
+}
+
+#longitud {
+	height:25px;
+	left:840px;
+	position:relative;
+	top:-1608px;
+	width:100px;
+}
+
+#rumbo {
+	height:25px;
+	left:770px;
+	position:relative;
+	top:-1590px;
+	width:50px;
+}
+
+#viaje {
+	height:25px;
+	left:886px;
+	position:relative;
+	top:-1632px;
+	width:70px;
+}
+
+#fecha-posicion {
+	height:25px;
+	left:777px;
+	position:relative;
+	top:-1607px;
+	width:160px;
+}
+
+
+#velocidad-maxima {
+	height:25px;
+	left:395px;
+	position:relative;
+	top:-1808px;
+	width:70px;
+}
+
+#frenados {
+	height:25px;
+	left:506px;
+	position:relative;
+	top:-1850px;
+	width:55px;
+}
+
+#luces {
+	height:25px;
+	left:603px;
+	position:relative;
+	top:-1893px;
+	width:45px;
+}
+
+#georeferencia {
+	height:80px;
+	left:353px;
+	position:relative;
+	top:-1876px;
+	width:298px;
+}
+

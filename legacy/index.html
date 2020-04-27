@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Panel del vehículo</title>
+		<!-- metas -->
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<meta name="Keywords" content="Metas"/>
+		<meta name="Description" content="LoJack's panel"/>
+		<meta name="Author" content="Federico Andrés Iglesias Colombo"/>
+
+		<meta name="Copyright" content="Cool Design"/>
+		<meta name="Generator" content="Aptana"/>
+		<meta name="Language" content="es">
+		<meta name="Robots" content="All"/>
+		<meta name="Revisit-after" content="1 day"/>
+		<meta name="Rating" content="General"/>
+
+
+		<!-- Definimos la variable URL para la consulta de los datos -->
+		<script type="text/javascript">
+			
+			//IMPORTANTE MARIANO: REEMPLAZAR CON LA DIRECCION XML CORRESPONDIENTE AL ALIMENTADOR DE DATOS XML. PUEDE SER EN FORMATO "http://www.dominio.com/datos.aspx"
+			var urlAjaxXML = "./XML/datos.xml";
+
+			//cada cuantos segundos se actualizaran los datos ?
+			var segundos = 5000;
+		</script>
+		
+		<!-- Cargamos los estilos -->
+		<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+
+		
+		<!-- Cargamos la libreria JQuery -->
+		<script type="text/javascript" src="lib/js/jquery/jquery-1.3.2.min.js"></script>
+
+		<!-- Cargamos Fuentes -->
+		<script type="text/javascript" src="./lib/js/sifr/js/sifr.js"></script>
+		<link rel="stylesheet" href="./lib/js/sifr/css/sifr.css" type="text/css">
+		<script type="text/javascript" src="./js/sifr-config.js"></script>
+
+	
+		<!-- Cargamos Funciones para graficas -->
+		<script type="text/javascript" src="js/funciones.js"></script>
+	
+		<!-- Cargamos la libreria pngFix en ie6 -->
+		<!--[if IE 6]>
+			<script type="text/javascript" src="lib/js/png-fix/js/jquery.pngFix.js"></script>
+			<script type="text/javascript">	
+				$(document).ready(function(){ 
+			    	$(document).pngFix(); 
+			    }); 
+			</script> 		
+		<![endif]--> 
+		
+		<!-- Cargamos Funciones para ajax -->
+		<script type="text/javascript" src="js/ajax.js"></script>
+		
+</head>
+<body>
+	<div id="principal">
+		<div id="panel">
+			<img src="images/tablero.png" alt="Instrumental"/>
+
+			<div id="tacometro">
+				<div id="tacometro-aguja"></div>
+				<img id="pivot-tacometer" src="images/pivot-tacometer.png" alt="Pivot tacometro"/>
+			</div>
+			<div id="temperature">
+				<div id="temperature-aguja"></div>
+				<img id="pivot-temperature" src="images/pivot-temperature.png" alt="Pivot temperature"/>
+			</div>
+			<div id="turbo">
+
+				<div id="turbo-aguja"></div>
+				<img id="pivot-turbo" src="images/pivot-turbo.png" alt="Pivot turbo"/>
+			</div>
+
+			<div id="aceite">
+
+				<div id="aceite-aguja"></div>
+				<img id="pivot-aceite" src="images/pivot-turbo.png" alt="Pivot turbo"/>
+			</div>
+			
+			<div id="acelerator">
+				<div id="acelerator-aguja"></div>
+				<img id="pivot-acelerator" src="images/pivot-turbo.png" alt="Pivot acelerator"/>
+			</div>
+			<div id="speedo">
+				<div id="speedo-aguja"></div>
+
+				<img id="pivot-speedo" src="images/pivot-tacometer.png" alt="Pivot speedo"/>
+			</div>
+			<div id="gasoil">
+				<div id="gasoil-aguja"></div>
+				<img id="pivot-gasoil" src="images/pivot-temperature.png" alt="Pivot gasoil"/>
+			</div>
+			<div id="kilometros-totales">
+				<h1>0</h1>
+
+			</div>
+			<div id="kilometros-parciales">
+				<h1>0</h1>
+			</div>
+			<div id="panel-lcd">
+				<div id="tiempo-detenido">
+					<h1>0</h1>	
+				</div>
+
+				<div id="tiempo-marcha">
+					<h1>0</h1>	
+				</div>
+				<div id="consumo-viaje">
+					<h1>0</h1>	
+				</div>
+				<div id="consumo-total">
+					<h1>0</h1>	
+				</div>
+
+				<div id="uso-crucero">
+					<h1>0</h1>	
+				</div>
+			</div>
+			
+			<div id="vehiculo">
+				<h1>-</h1>
+			</div>
+
+			<div id="chofer">
+				<h1>-</h1>
+			</div>
+			
+			<div id="patente">
+				<h1>-</h1>
+			</div>
+			
+			<div id="latitud">
+				<h1>-</h1>
+			</div>
+			
+			<div id="longitud">
+				<h1>-</h1>
+			</div>
+
+			<div id="rumbo">
+				<h1>-</h1>
+			</div>
+
+			<div id="viaje">
+				<h1>-</h1>
+			</div>
+
+			<div id="fecha-posicion">
+				<h1>-</h1>
+			</div>
+			
+			<div id="velocidad-maxima">
+				<h1>-</h1>
+			</div>
+
+			<div id="frenados">
+				<h1>-</h1>
+			</div>
+			
+			<div id="luces">
+				<h1>-</h1>
+			</div>
+			
+			<div id="georeferencia">
+				<h1>-</h1>
+			</div>
+			
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		var Tacometro = new FusionCharts("swf/graph.swf", "tacometro-aguja1", "250", "200", "0", "1");
+	      Tacometro.setDataXML("<chart lowerLimit='0' bgAlpha='0,0' showPrintMenuItem='0' showAboutMenuItem='0' upperLimit='4000' gaugeStartAngle='220' gaugeEndAngle='-42' showTickMarks='0' showTickValues='0' gaugeOuterRadius='100' bgSWFAlpha='0' showBorder='0'><dials><dial value='0' rearExtension='0' baseWidth='5' topWidth='2' bgColor='fff6f9,f4462b' borderColor='ffbdc8' borderThickness='1'>hola</dial></dials><styles><definition><style name='reflejoGrande' type='Glow' color='FF5904' alpha='20' blurX='5' blurY='5' quality='10'/><style name='reflejoChico' type='Glow' color='FF5904' alpha='75' quality='10'/></definition><application><apply toObject='Dial' styles='ReflejoChico' /><apply toObject='Dial' styles='ReflejoGrande' /></application></styles></chart>");
+	      Tacometro.setTransparent(true);
+		  Tacometro.render("tacometro-aguja");
+		  
+		var Temperature = new FusionCharts("swf/graph.swf", "temperature-aguja1", "100", "100", "0", "1");
+	      Temperature.setDataXML("<chart lowerLimit='0' bgAlpha='0,0' showPrintMenuItem='0' showAboutMenuItem='0' upperLimit='150' gaugeStartAngle='-20' gaugeEndAngle='56' showTickMarks='0' showTickValues='0' gaugeOuterRadius='50' bgSWFAlpha='0' showBorder='0'><dials><dial value='0' rearExtension='0' baseWidth='5' topWidth='2' bgColor='fff6f9,f4462b' borderColor='ffbdc8' borderThickness='1'/></dials><styles><definition><style name='reflejoGrande' type='Glow' color='FF5904' alpha='20' blurX='5' blurY='5' quality='10'/><style name='reflejoChico' type='Glow' color='FF5904' alpha='75' quality='10'/></definition><application><apply toObject='Dial' styles='ReflejoChico' /><apply toObject='Dial' styles='ReflejoGrande' /></application></styles></chart>");
+	      Temperature.setTransparent(true);
+		  Temperature.render("temperature-aguja");	
+		  
+		var Turbo = new FusionCharts("swf/graph.swf", "turbo-aguja1", "100", "100", "0", "1");
+	      Turbo.setDataXML("<chart lowerLimit='0' bgAlpha='0,0' showPrintMenuItem='0' showAboutMenuItem='0' upperLimit='0' gaugeStartAngle='140' gaugeEndAngle='40' showTickMarks='0' showTickValues='0' gaugeOuterRadius='30' bgSWFAlpha='0' showBorder='0'><dials><style name='MyFirstGlow' type='Glow' color='FF5904' alpha='75'/><dial value='100' rearExtension='0' baseWidth='4' topWidth='1' bgColor='fff6f9,f4462b' borderColor='ffbdc8' borderThickness='1'/></dials><styles><definition><style name='reflejoGrande' type='Glow' color='FF5904' alpha='20' blurX='5' blurY='5' quality='10'/><style name='reflejoChico' type='Glow' color='FF5904' alpha='75' quality='10'/></definition><application><apply toObject='Dial' styles='ReflejoChico' /><apply toObject='Dial' styles='ReflejoGrande' /></application></styles></chart>");
+	      Turbo.setTransparent(true);
+		  Turbo.render("turbo-aguja");
+		  
+		var Aceite = new FusionCharts("swf/graph.swf", "aceite-aguja1", "100", "100", "0", "1");
+	      Aceite.setDataXML("<chart lowerLimit='0' bgAlpha='0,0' showPrintMenuItem='0' showAboutMenuItem='0' upperLimit='7' gaugeStartAngle='140' gaugeEndAngle='40' showTickMarks='0' showTickValues='0' gaugeOuterRadius='30' bgSWFAlpha='0' showBorder='0'><dials><style name='MyFirstGlow' type='Glow' color='FF5904' alpha='75'/><dial value='0' rearExtension='0' baseWidth='4' topWidth='1' bgColor='fff6f9,f4462b' borderColor='ffbdc8' borderThickness='1'/></dials><styles><definition><style name='reflejoGrande' type='Glow' color='FF5904' alpha='20' blurX='5' blurY='5' quality='10'/><style name='reflejoChico' type='Glow' color='FF5904' alpha='75' quality='10'/></definition><application><apply toObject='Dial' styles='ReflejoChico' /><apply toObject='Dial' styles='ReflejoGrande' /></application></styles></chart>");
+	      Aceite.setTransparent(true);
+		  Aceite.render("aceite-aguja");
+		  
+		var Acelerator = new FusionCharts("swf/graph.swf", "acelerator-aguja1", "100", "100", "0", "1");
+	      Acelerator.setDataXML("<chart lowerLimit='0' bgAlpha='0,0' showPrintMenuItem='0' showAboutMenuItem='0' upperLimit='100' gaugeStartAngle='140' gaugeEndAngle='40' showTickMarks='0' showTickValues='0' gaugeOuterRadius='30' bgSWFAlpha='0' showBorder='0'><dials><style name='MyFirstGlow' type='Glow' color='FF5904' alpha='75'/><dial value='0' rearExtension='0' baseWidth='4' topWidth='1' bgColor='fff6f9,f4462b' borderColor='ffbdc8' borderThickness='1'/></dials><styles><definition><style name='reflejoGrande' type='Glow' color='FF5904' alpha='20' blurX='5' blurY='5' quality='10'/><style name='reflejoChico' type='Glow' color='FF5904' alpha='75' quality='10'/></definition><application><apply toObject='Dial' styles='ReflejoChico' /><apply toObject='Dial' styles='ReflejoGrande' /></application></styles></chart>");
+	      Acelerator.setTransparent(true);
+		  Acelerator.render("acelerator-aguja");
+		  
+		var Speedo = new FusionCharts("swf/graph.swf", "speedo-aguja1", "250", "200", "0", "1");
+	      Speedo.setDataXML("<chart lowerLimit='0' bgAlpha='0,0' showPrintMenuItem='0' showAboutMenuItem='0' upperLimit='180' gaugeStartAngle='221' gaugeEndAngle='-40' showTickMarks='0' showTickValues='0' gaugeOuterRadius='100' bgSWFAlpha='0' showBorder='0'><dials><dial value='0' rearExtension='0' baseWidth='5' topWidth='2' bgColor='fff6f9,f4462b' borderColor='ffbdc8' borderThickness='1'/></dials><styles><definition><style name='reflejoGrande' type='Glow' color='FF5904' alpha='20' blurX='5' blurY='5' quality='10'/><style name='reflejoChico' type='Glow' color='FF5904' alpha='75' quality='10'/></definition><application><apply toObject='Dial' styles='ReflejoChico' /><apply toObject='Dial' styles='ReflejoGrande' /></application></styles></chart>");
+	      Speedo.setTransparent(true);
+		  Speedo.render("speedo-aguja");
+		  
+		var Gasoil = new FusionCharts("swf/graph.swf", "gasoil-aguja1", "110", "100", "0", "1");
+	      Gasoil.setDataXML("<chart lowerLimit='0' bgAlpha='0,0' showPrintMenuItem='0' showAboutMenuItem='0' upperLimit='100' gaugeStartAngle='190' gaugeEndAngle='130' showTickMarks='0' showTickValues='0' gaugeOuterRadius='50' bgSWFAlpha='0' showBorder='0'><dials><dial value='0' rearExtension='0' baseWidth='5' topWidth='2' bgColor='fff6f9,f4462b' borderColor='ffbdc8' borderThickness='1'/></dials><styles><definition><style name='reflejoGrande' type='Glow' color='FF5904' alpha='20' blurX='5' blurY='5' quality='10'/><style name='reflejoChico' type='Glow' color='FF5904' alpha='75' quality='10'/></definition><application><apply toObject='Dial' styles='ReflejoChico' /><apply toObject='Dial' styles='ReflejoGrande' /></application></styles></chart>");
+	      Gasoil.setTransparent(true);
+		  Gasoil.render("gasoil-aguja"); 
+		  
+	</script>
+</body>
+</html>
