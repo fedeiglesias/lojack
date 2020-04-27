@@ -6,7 +6,7 @@
     "start": "serve -s dist -l 5050",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test": "vue-cli-service test:unit",
+    "test": "vue-cli-service test:unit --passWithNoTests",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
