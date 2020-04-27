@@ -1,7 +1,7 @@
 workbox.core.setCacheNameDetails({prefix: "lojack"})
 
 //Change this value every time before you build
-const LATEST_VERSION = 'v1.0'
+const LATEST_VERSION = 'v1.1'
 
 self.addEventListener('activate', () => {
   console.log(`%c ${LATEST_VERSION} `, 'background: #ddd; color: #0000ff')
