@@ -1,0 +1,181 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "The AWS CloudFormation template for this Serverless application",
+  "Resources": {
+    "ServerlessDeploymentBucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "SSEAlgorithm": "AES256"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "ServerlessDeploymentBucketPolicy": {
+      "Type": "AWS::S3::BucketPolicy",
+      "Properties": {
+        "Bucket": {
+          "Ref": "ServerlessDeploymentBucket"
+        },
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:*",
+              "Effect": "Deny",
+              "Principal": "*",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":s3:::",
+                      {
+                        "Ref": "ServerlessDeploymentBucket"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ],
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": false
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "WebsiteBucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": "lojack-bucket",
+        "AccessControl": "PublicRead",
+        "WebsiteConfiguration": {
+          "IndexDocument": "index.html",
+          "ErrorDocument": "index.html"
+        }
+      }
+    },
+    "WebsiteBucketPolicy": {
+      "Type": "AWS::S3::BucketPolicy",
+      "DependsOn": [
+        "WebsiteBucket"
+      ],
+      "Properties": {
+        "Bucket": {
+          "Ref": "WebsiteBucket"
+        },
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Sid": "PublicReadGetObject",
+              "Effect": "Allow",
+              "Principal": "*",
+              "Action": [
+                "s3:GetObject"
+              ],
+              "Resource": "arn:aws:s3:::lojack-bucket/*"
+            }
+          ]
+        }
+      }
+    },
+    "CFDistribution": {
+      "Type": "AWS::CloudFront::Distribution",
+      "DependsOn": [
+        "WebsiteBucket"
+      ],
+      "Properties": {
+        "DistributionConfig": {
+          "PriceClass": "PriceClass_100",
+          "Aliases": [
+            "lojack.pixium.io"
+          ],
+          "Origins": [
+            {
+              "DomainName": "lojack-bucket.s3.amazonaws.com",
+              "Id": "WebApp",
+              "CustomOriginConfig": {
+                "HTTPPort": 80,
+                "HTTPSPort": 443,
+                "OriginProtocolPolicy": "https-only"
+              }
+            }
+          ],
+          "Enabled": "true",
+          "HttpVersion": "http2",
+          "DefaultRootObject": "index.html",
+          "CustomErrorResponses": [
+            {
+              "ErrorCode": 404,
+              "ResponseCode": 200,
+              "ResponsePagePath": "/index.html"
+            }
+          ],
+          "DefaultCacheBehavior": {
+            "AllowedMethods": [
+              "DELETE",
+              "GET",
+              "HEAD",
+              "OPTIONS",
+              "PATCH",
+              "POST",
+              "PUT"
+            ],
+            "TargetOriginId": "WebApp",
+            "ForwardedValues": {
+              "QueryString": "false",
+              "Cookies": {
+                "Forward": "none"
+              }
+            },
+            "ViewerProtocolPolicy": "redirect-to-https"
+          },
+          "ViewerCertificate": {
+            "MinimumProtocolVersion": "TLSv1.1_2016",
+            "SslSupportMethod": "sni-only",
+            "AcmCertificateArn": "arn:aws:acm:us-east-1:989257975727:certificate/af08c4cc-6b8d-4b21-a831-dce800e7001c"
+          }
+        }
+      }
+    },
+    "DnsRecord": {
+      "Type": "AWS::Route53::RecordSet",
+      "DependsOn": [
+        "WebsiteBucket",
+        "WebsiteBucketPolicy",
+        "CFDistribution"
+      ],
+      "Properties": {
+        "Comment": "Alias CloudFront for lojack.pixium.io",
+        "HostedZoneId": "Z008637234M1UDGEMIGLS",
+        "Type": "CNAME",
+        "TTL": "300",
+        "Name": "lojack.pixium.io",
+        "ResourceRecords": [
+          {
+            "Fn::Sub": "${CFDistribution.DomainName}"
+          }
+        ]
+      }
+    }
+  },
+  "Outputs": {
+    "ServerlessDeploymentBucketName": {
+      "Value": {
+        "Ref": "ServerlessDeploymentBucket"
+      }
+    }
+  }
+}

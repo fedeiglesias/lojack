@@ -1,0 +1,21 @@
+Resources:
+  DnsRecord:
+    Type: 'AWS::Route53::RecordSet'
+    DependsOn:
+      - WebsiteBucket
+      - WebsiteBucketPolicy
+      - CFDistribution
+    Properties:
+      Comment: 'Alias CloudFront for ${self:custom.domain.subdomain}'
+      HostedZoneId: ${self:custom.domain.id}
+      Type: CNAME
+      TTL: '300'
+      Name: ${self:custom.domain.subdomain}
+      ResourceRecords:
+        - '#{CFDistribution.DomainName}'
+
+      #AliasTarget:
+        # Generated domain name from CloudFront
+        # DNSName: '#{CFDistribution.DomainName}'
+        # Default (static) hosted zone for CloudFront
+        # HostedZoneId: 'Z2FDTNDATAQYW2'

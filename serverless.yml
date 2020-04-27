@@ -1,0 +1,45 @@
+service: lojack
+
+# app and org for use with dashboard.serverless.com
+app: lojack
+org: fedeiglesias
+
+plugins:
+  - serverless-pseudo-parameters
+  - serverless-plugin-scripts
+  - serverless-s3-sync
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+
+custom:
+
+  domain:
+    # AWS domain id
+    id: 'Z008637234M1UDGEMIGLS'
+    name: pixium.io
+    subdomain: lojack.pixium.io
+    # AWS certificate domain arn
+    certificateArn: arn:aws:acm:us-east-1:989257975727:certificate/af08c4cc-6b8d-4b21-a831-dce800e7001c
+
+  # Bucket name
+  s3Bucket: ${self:service.name}-bucket
+  
+  s3Sync:
+    - bucketName: ${self:custom.s3Bucket}
+      localDir: dist
+      params:
+        - index.html:
+            CacheControl: 'no-store, no-cache'
+        - service-worker.js:
+            CacheControl: 'no-store, no-cache'
+  scripts:
+    hooks:
+      'before:deploy:deploy': npm run build
+
+resources:
+  - ${file(aws/resources/s3-bucket.yml)}
+  - ${file(aws/resources/s3-policies.yml)}
+  - ${file(aws/resources/cf-distribution.yml)}
+  - ${file(aws/resources/dns-records.yml)}
