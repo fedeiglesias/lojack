@@ -206,10 +206,8 @@ export default {
   .turbo {
     left: $turbo-left;
     top: $turbo-top;
-    opacity: 1;
     
     & + img {
-      opacity: 1.4;
       left: $turbo-left;
       top: $turbo-top;
     }
@@ -218,10 +216,8 @@ export default {
   .oil {
     left: $oil-left;
     top: $oil-top;
-    opacity: 1;
     
     & + img {
-      opacity: 1.4;
       left: $oil-left;
       top: $oil-top;
     }
@@ -230,10 +226,8 @@ export default {
   .acelerator {
     left: $acelerator-left;
     top: $acelerator-top;
-    opacity: 1;
     
     & + img {
-      opacity: 1.4;
       left: $acelerator-left;
       top: $acelerator-top;
     }
