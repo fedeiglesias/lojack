@@ -16,6 +16,32 @@
       <img src="@/assets/pivot.png" class="pivot sm">
       <div class="gauge sm acelerator" style="transform: rotate(-132deg)"></div>
       <img src="@/assets/pivot.png" class="pivot sm">
+      <div class="lcd">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 36">
+          <text x="100%" y="15" text-anchor="end">TIEMPO DETENIDO</text>
+          <text x="96%" y="30" text-anchor="end">12345678</text>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 36">
+          <text x="100%" y="15" text-anchor="end">TIEMPO MARCHA</text>
+          <text x="96%" y="30" text-anchor="end">12345678</text>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 36">
+          <text x="100%" y="15" text-anchor="end">CONSUMO VIAJE</text>
+          <text x="96%" y="30" text-anchor="end">12345678</text>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 36">
+          <text x="100%" y="15" text-anchor="end">CONSUMO TOTAL</text>
+          <text x="96%" y="30" text-anchor="end">12345678</text>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 36">
+          <text x="100%" y="15" text-anchor="end">VEL. CRUCERO</text>
+          <text x="96%" y="30" text-anchor="end">12345678</text>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 36">
+          <text x="100%" y="15" text-anchor="end">USO CRUCERO</text>
+          <text x="96%" y="30" text-anchor="end">12345678</text>
+        </svg>
+      </div>
     </div>
   </div>
 </template>
@@ -232,5 +258,34 @@ export default {
       top: $acelerator-top;
     }
   }
+
+  .lcd {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 28.3%;;
+    left: 44.7%;
+    width: 10.2%;
+    height: 25%;
+    padding: 0 0.5%;
+    box-sizing: border-box;
+
+    &> svg {
+      width: 100%;
+      text {
+        &:nth-child(1) {
+          fill: rgba(229, 253, 255, 0.6);
+          font-size: 11px;
+          font-family: 'EHS';
+        }
+        &:nth-child(2) {
+          fill: #2cf1ff;
+          font-size: 15px;
+          font-family: 'LEDDotMatrix';
+        }
+      }
+    }
+  }
+
 
 </style>
