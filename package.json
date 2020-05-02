@@ -10,8 +10,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "chroma-js": "^2.1.0",
     "core-js": "^3.6.4",
-    "polished": "^3.5.2",
     "register-service-worker": "^1.7.1",
     "serverless-plugin-scripts": "^1.0.2",
     "serverless-pseudo-parameters": "^2.5.0",
