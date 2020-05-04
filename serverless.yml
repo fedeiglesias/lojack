@@ -8,13 +8,13 @@ plugins:
   - serverless-pseudo-parameters
   - serverless-plugin-scripts
   - serverless-s3-sync
+  - serverless-domain-manager
 
 provider:
   name: aws
   runtime: nodejs10.x
 
 custom:
-
   domain:
     # AWS domain id
     id: 'Z008637234M1UDGEMIGLS'
@@ -36,7 +36,25 @@ custom:
             CacheControl: 'no-store, no-cache'
   scripts:
     hooks:
+      # Recreate API Gateway & Route53 custom domain for API
+      'package:initialize': 'sls delete_domain && sls create_domain'
+      # Build Client
       'before:deploy:deploy': npm run build
+  
+  customDomain:
+    domainName: api.${self:custom.domain.subdomain}
+    endpointType: 'regional'
+    securityPolicy: tls_1_2
+
+functions:
+  dashboardData:
+    handler: api/dashboard.data
+    memorySize: 128
+    description: Get Dashboard data
+    events:
+      - http: 
+          path: data
+          method: get
 
 resources:
   - ${file(aws/resources/s3-bucket.yml)}

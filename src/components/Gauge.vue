@@ -126,17 +126,20 @@ export default {
   computed: {
     valueToDegree() {
       let degree = (this.absRange * this.valueToPercent) + this.startDegree + this.gaugeDegCorrection
+      // eslint-disable-next-line
       if(this.debugging) console.log('valueToDegree: ', degree)
       return degree
     },
     valueToPercent() {
       let percent = (this.value - this.valueMin) / (this.valueMax - this.valueMin)
       if(this.inverted) percent = 1 - percent
+      // eslint-disable-next-line
       if(this.debugging) console.log('valueToPercent: ', percent)
       return percent
     },
     absRange() {
       let absRange = Math.abs(this.startDegree - this.endDegree)
+      // eslint-disable-next-line
       if(this.debugging) console.log('absRange: ', absRange)
       return absRange
     }
