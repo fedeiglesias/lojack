@@ -5,7 +5,7 @@
 
       <Gauge
         class="rpm"
-        :value="0"
+        :value="$store.state.dashboard.data.rpm"
         :valueMin="0"
         :valueMax="4000"
         :startDegree="-38"
@@ -15,7 +15,7 @@
 
       <Gauge
         class="speed"
-        :value="0"
+        :value="$store.state.dashboard.data.speed"
         :valueMin="0"
         :valueMax="180"
         :startDegree="-39"
@@ -26,7 +26,7 @@
       <Gauge
         class="temp"
         :inverted="true"
-        :value="0"
+        :value="$store.state.dashboard.data.engineTemperature"
         :valueMin="0"
         :valueMax="155"
         :startDegree="107"
@@ -36,8 +36,8 @@
       />
 
       <Gauge
-        class="gas"
-        :value="0"
+        class="fuel"
+        :value="$store.state.dashboard.data.fuel"
         :valueMin="0"
         :valueMax="100"
         :startDegree="-28"
@@ -48,7 +48,7 @@
 
       <Gauge
         class="turbo"
-        :value="0"
+        :value="$store.state.dashboard.data.turbo"
         :valueMin="0"
         :valueMax="100"
         :startDegree="45"
@@ -59,7 +59,7 @@
 
       <Gauge
         class="oil"
-        :value="0"
+        :value="$store.state.dashboard.data.oilPressure"
         :valueMin="0"
         :valueMax="100"
         :startDegree="46"
@@ -70,7 +70,7 @@
 
       <Gauge
         class="throttle"
-        :value="0"
+        :value="$store.state.dashboard.data.throttle"
         :valueMin="0"
         :valueMax="100"
         :startDegree="46"
@@ -80,16 +80,32 @@
       />
 
       <div class="lcd">
-        <Lcd label="TIEMPO DETENIDO" color="#2cf1ff">123456</Lcd>
-        <Lcd label="TIEMPO MARCHA" color="#2cf1ff">123456</Lcd>
-        <Lcd label="CONSUMO VIAJE" color="#2cf1ff">123456</Lcd>
-        <Lcd label="CONSUMO TOTAL" color="#2cf1ff">123456</Lcd>
-        <Lcd label="VEL. CRUCERO" color="#2cf1ff">123456</Lcd>
-        <Lcd label="USO CRUCERO" color="#2cf1ff">123456</Lcd>
+        <Lcd label="TIEMPO DETENIDO" color="#2cf1ff">
+          {{$store.state.dashboard.data.stoppedTime}}
+        </Lcd>
+        <Lcd label="TIEMPO MARCHA" color="#2cf1ff">
+          {{$store.state.dashboard.data.runningTime}}
+        </Lcd>
+        <Lcd label="CONSUMO VIAJE" color="#2cf1ff">
+          {{$store.state.dashboard.data.tripConsumption}}
+        </Lcd>
+        <Lcd label="CONSUMO TOTAL" color="#2cf1ff">
+          {{$store.state.dashboard.data.totalConsumption}}
+        </Lcd>
+        <Lcd label="VEL. CRUCERO" color="#2cf1ff">
+          {{$store.state.dashboard.data.cruisingSpeed}}
+        </Lcd>
+        <Lcd label="VEL. MAXIMA" color="#2cf1ff">
+          {{$store.state.dashboard.data.maxSpeed}}
+        </Lcd>
       </div>
 
-      <Lcd label="KM TOTALES" color="#ffa44b" class="km-total">356000</Lcd>
-      <Lcd label="KM VIAJE" color="#ffa44b" class="km-trip">750</Lcd>
+      <Lcd label="KM TOTALES" color="#ffa44b" class="km-total">
+        {{$store.state.dashboard.data.kmTotal}}
+      </Lcd>
+      <Lcd label="KM VIAJE" color="#ffa44b" class="km-trip">
+        {{$store.state.dashboard.data.kmTrip}}
+      </Lcd>
     </div>
   </div>
 </template>
@@ -133,7 +149,11 @@ export default {
       type: Number,
       default: 0 //percent
     }
-  }
+  },
+  beforeCreate () {
+    setInterval(() => this.$store.dispatch('dashboard/getData'), 3000);
+    
+  },
 };
 </script>
 
@@ -192,7 +212,7 @@ $bg-heigth: 860px;
   transform: translate(-50%, -50%);
 }
 
-.gas {
+.fuel {
   position: absolute;
   top: 51.9%;
   left: 85.8%;
