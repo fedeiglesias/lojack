@@ -106,19 +106,73 @@
       <Lcd label="KM VIAJE" color="#ffa44b" class="km-trip">
         {{$store.state.dashboard.data.kmTrip}}
       </Lcd>
+
+    <div class="item vehicle">
+      <SVGText canvasWidth="200" fontWeight="700">VEHICULO</SVGText>
+      <SVGText canvasWidth="200" fontWeight="400">{{$store.state.dashboard.data.vehicle}}</SVGText>
+    </div>
+
+    <div class="item driver">
+      <SVGText canvasWidth="200" fontWeight="700">CHOFER</SVGText>
+      <SVGText canvasWidth="200" fontWeight="400">{{$store.state.dashboard.data.driver}}</SVGText>
+    </div>
+
+    <div class="item plate">
+      <SVGText canvasWidth="200" fontWeight="700">MATRICULA</SVGText>
+      <SVGText canvasWidth="200" fontWeight="400">{{$store.state.dashboard.data.plate}}</SVGText>
+    </div>
+
+    <div class="item lat-long">
+      <SVGText canvasWidth="200" fontWeight="700">LATITUD | LONGITUD</SVGText>
+      <SVGText canvasWidth="200" fontWeight="400">
+        {{$store.state.dashboard.data.latitude}} | {{$store.state.dashboard.data.longitude}}
+      </SVGText>
+    </div>
+
+    <div class="item course">
+      <SVGText canvasWidth="200" fontWeight="700">RUMBO</SVGText>
+      <SVGText canvasWidth="200" fontWeight="400">{{$store.state.dashboard.data.course}} > VIAJE {{$store.state.dashboard.data.trip}}</SVGText>
+    </div>
+
+    <div class="item date-position">
+      <SVGText canvasWidth="200" fontWeight="700">FECHA POSICIÓN</SVGText>
+      <SVGText canvasWidth="200" fontWeight="400">{{$store.state.dashboard.data.datePosition}}</SVGText>
+    </div>
+
+    <div class="item street">
+      <SVGText canvasWidth="240" fontWeight="700">GEOREFERENCIA</SVGText>
+      <SVGText canvasWidth="240" fontWeight="400">{{$store.state.dashboard.data.street}}</SVGText>
+    </div>
+
+    <div class="item stops">
+      <SVGText canvasWidth="200" fontWeight="700">FRENADOS</SVGText>
+      <SVGText canvasWidth="200" fontWeight="400">{{$store.state.dashboard.data.stops}}</SVGText>
+    </div>
+
+    <div class="item lights">
+      <SVGText canvasWidth="200" fontWeight="700">LUCES</SVGText>
+      <SVGText canvasWidth="200" fontWeight="400">
+        {{
+          $store.state.dashboard.data.lights ? 
+            'Encendidas' : 'Apagadas'
+        }}</SVGText>
+    </div>
+
     </div>
   </div>
 </template>
 
 <script>
-import Lcd from "./Lcd";
-import Gauge from "./Gauge";
+import Lcd from "./Lcd"
+import Gauge from "./Gauge"
+import SVGText from "./SVGText"
 
 export default {
   name: "Dashboard",
   components: {
     Lcd,
-    Gauge
+    Gauge,
+    SVGText
   },
   props: {
     speed: {
@@ -269,4 +323,72 @@ $bg-heigth: 860px;
   left: 62.65%;
   width: 10%;
 }
+
+.item {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  $left-x: 13%;
+  $right-x: 76.6%;
+  $row-1: 68.5%;
+  $row-2: 79%;
+  $row-3: 89.5%;
+
+  &.vehicle {
+    top: $row-1;
+    left: $left-x;
+    width: 15%;
+    height: 6%;
+  }
+
+  &.driver {
+    top: $row-2;
+    left: $left-x;
+    width: 15%;
+  }
+
+  &.plate {
+    top: $row-3;
+    left: $left-x;
+    width: 15%;
+  }
+
+  &.lat-long {
+    top: $row-1;
+    left: $right-x;
+    width: 15%;
+  }
+
+  &.course {
+    top: $row-2;
+    left: $right-x;
+    width: 15%;
+  }
+
+  &.date-position {
+    top: $row-3;
+    left: $right-x;
+    width: 15%;
+  }
+
+  &.stops {
+    top: 63.4%;
+    left: 40%;
+    width: 15%;
+  }
+
+  &.lights {
+    top: 63.4%;
+    left: 56%;
+    width: 15%;
+  }
+
+  &.street {
+    top: 70.5%;
+    left: 40%;
+    width: 17%;
+  }
+}
+
+
 </style>
