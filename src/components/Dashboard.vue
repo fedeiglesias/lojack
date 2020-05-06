@@ -80,92 +80,84 @@
       />
 
       <div class="lcd">
-        <Lcd label="TIEMPO DETENIDO" color="#2cf1ff">
-          {{$store.state.dashboard.data.stoppedTime}}
-        </Lcd>
-        <Lcd label="TIEMPO MARCHA" color="#2cf1ff">
-          {{$store.state.dashboard.data.runningTime}}
-        </Lcd>
-        <Lcd label="CONSUMO VIAJE" color="#2cf1ff">
-          {{$store.state.dashboard.data.tripConsumption}}
-        </Lcd>
-        <Lcd label="CONSUMO TOTAL" color="#2cf1ff">
-          {{$store.state.dashboard.data.totalConsumption}}
-        </Lcd>
-        <Lcd label="VEL. CRUCERO" color="#2cf1ff">
-          {{$store.state.dashboard.data.cruisingSpeed}}
-        </Lcd>
-        <Lcd label="VEL. MAXIMA" color="#2cf1ff">
-          {{$store.state.dashboard.data.maxSpeed}}
-        </Lcd>
+        <Lcd label="TIEMPO DETENIDO" color="#2cf1ff">{{$store.state.dashboard.data.stoppedTime}}</Lcd>
+        <Lcd label="TIEMPO MARCHA" color="#2cf1ff">{{$store.state.dashboard.data.runningTime}}</Lcd>
+        <Lcd label="CONSUMO VIAJE" color="#2cf1ff">{{$store.state.dashboard.data.tripConsumption}}</Lcd>
+        <Lcd label="CONSUMO TOTAL" color="#2cf1ff">{{$store.state.dashboard.data.totalConsumption}}</Lcd>
+        <Lcd label="VEL. CRUCERO" color="#2cf1ff">{{$store.state.dashboard.data.cruisingSpeed}}</Lcd>
+        <Lcd label="VEL. MAXIMA" color="#2cf1ff">{{$store.state.dashboard.data.maxSpeed}}</Lcd>
       </div>
 
-      <Lcd label="KM TOTALES" color="#ffa44b" class="km-total">
-        {{$store.state.dashboard.data.kmTotal}}
-      </Lcd>
-      <Lcd label="KM VIAJE" color="#ffa44b" class="km-trip">
-        {{$store.state.dashboard.data.kmTrip}}
-      </Lcd>
+      <Lcd
+        label="KM TOTALES"
+        color="#ffa44b"
+        class="km-total"
+      >{{$store.state.dashboard.data.kmTotal}}</Lcd>
+      <Lcd label="KM VIAJE" color="#ffa44b" class="km-trip">{{$store.state.dashboard.data.kmTrip}}</Lcd>
 
-    <div class="item vehicle">
-      <SVGText canvasWidth="200" fontWeight="700">VEHICULO</SVGText>
-      <SVGText canvasWidth="200" fontWeight="400">{{$store.state.dashboard.data.vehicle}}</SVGText>
-    </div>
+      <div class="item vehicle">
+        <SVGText :canvasWidth="200" :fontWeight="700">VEHICULO</SVGText>
+        <SVGText :canvasWidth="200" :fontWeight="400">{{$store.state.dashboard.data.vehicle}}</SVGText>
+      </div>
 
-    <div class="item driver">
-      <SVGText canvasWidth="200" fontWeight="700">CHOFER</SVGText>
-      <SVGText canvasWidth="200" fontWeight="400">{{$store.state.dashboard.data.driver}}</SVGText>
-    </div>
+      <div class="item driver">
+        <SVGText :canvasWidth="200" :fontWeight="700">CHOFER</SVGText>
+        <SVGText :canvasWidth="200" :fontWeight="400">{{$store.state.dashboard.data.driver}}</SVGText>
+      </div>
 
-    <div class="item plate">
-      <SVGText canvasWidth="200" fontWeight="700">MATRICULA</SVGText>
-      <SVGText canvasWidth="200" fontWeight="400">{{$store.state.dashboard.data.plate}}</SVGText>
-    </div>
+      <div class="item plate">
+        <SVGText :canvasWidth="200" :fontWeight="700">MATRICULA</SVGText>
+        <SVGText :canvasWidth="200" :fontWeight="400">{{$store.state.dashboard.data.plate}}</SVGText>
+      </div>
 
-    <div class="item lat-long">
-      <SVGText canvasWidth="200" fontWeight="700">LATITUD | LONGITUD</SVGText>
-      <SVGText canvasWidth="200" fontWeight="400">
-        {{$store.state.dashboard.data.latitude}} | {{$store.state.dashboard.data.longitude}}
-      </SVGText>
-    </div>
+      <div class="item lat-long">
+        <SVGText :canvasWidth="200" :fontWeight="700">LATITUD | LONGITUD</SVGText>
+        <SVGText
+          :canvasWidth="200"
+          :fontWeight="400"
+        >{{$store.state.dashboard.data.latitude}} | {{$store.state.dashboard.data.longitude}}</SVGText>
+      </div>
 
-    <div class="item course">
-      <SVGText canvasWidth="200" fontWeight="700">RUMBO</SVGText>
-      <SVGText canvasWidth="200" fontWeight="400">{{$store.state.dashboard.data.course}} > VIAJE {{$store.state.dashboard.data.trip}}</SVGText>
-    </div>
+      <div class="item course">
+        <SVGText :canvasWidth="200" :fontWeight="700">RUMBO</SVGText>
+        <SVGText
+          :canvasWidth="200"
+          :fontWeight="400"
+        >{{$store.state.dashboard.data.course}} > VIAJE {{$store.state.dashboard.data.trip}}</SVGText>
+      </div>
 
-    <div class="item date-position">
-      <SVGText canvasWidth="200" fontWeight="700">FECHA POSICIÓN</SVGText>
-      <SVGText canvasWidth="200" fontWeight="400">{{$store.state.dashboard.data.datePosition}}</SVGText>
-    </div>
+      <div class="item date-position">
+        <SVGText :canvasWidth="200" :fontWeight="700">FECHA POSICIÓN</SVGText>
+        <SVGText :canvasWidth="200" :fontWeight="400">{{$store.state.dashboard.data.datePosition}}</SVGText>
+      </div>
 
-    <div class="item street">
-      <SVGText canvasWidth="240" fontWeight="700">GEOREFERENCIA</SVGText>
-      <SVGText canvasWidth="240" fontWeight="400">{{$store.state.dashboard.data.street}}</SVGText>
-    </div>
+      <div class="item street">
+        <SVGText :canvasWidth="240" :fontWeight="700">GEOREFERENCIA</SVGText>
+        <SVGText :canvasWidth="240" :fontWeight="400">{{$store.state.dashboard.data.street}}</SVGText>
+      </div>
 
-    <div class="item stops">
-      <SVGText canvasWidth="200" fontWeight="700">FRENADOS</SVGText>
-      <SVGText canvasWidth="200" fontWeight="400">{{$store.state.dashboard.data.stops}}</SVGText>
-    </div>
+      <div class="item stops">
+        <SVGText :canvasWidth="200" :fontWeight="700">FRENADOS</SVGText>
+        <SVGText :canvasWidth="200" :fontWeight="400">{{$store.state.dashboard.data.stops}}</SVGText>
+      </div>
 
-    <div class="item lights">
-      <SVGText canvasWidth="200" fontWeight="700">LUCES</SVGText>
-      <SVGText canvasWidth="200" fontWeight="400">
-        {{
-          $store.state.dashboard.data.lights ? 
-            'Encendidas' : 'Apagadas'
-        }}</SVGText>
-    </div>
-
+      <div class="item lights">
+        <SVGText :canvasWidth="200" :fontWeight="700">LUCES</SVGText>
+        <SVGText :canvasWidth="200" :fontWeight="400">
+          {{
+          $store.state.dashboard.data.lights ?
+          'Encendidas' : 'Apagadas'
+          }}
+        </SVGText>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Lcd from "./Lcd"
-import Gauge from "./Gauge"
-import SVGText from "./SVGText"
+import Lcd from "./Lcd";
+import Gauge from "./Gauge";
+import SVGText from "./SVGText";
 
 export default {
   name: "Dashboard",
@@ -204,10 +196,9 @@ export default {
       default: 0 //percent
     }
   },
-  beforeCreate () {
-    setInterval(() => this.$store.dispatch('dashboard/getData'), 3000);
-    
-  },
+  beforeCreate() {
+    setInterval(() => this.$store.dispatch("dashboard/getData"), 3000);
+  }
 };
 </script>
 
@@ -389,6 +380,4 @@ $bg-heigth: 860px;
     width: 17%;
   }
 }
-
-
 </style>

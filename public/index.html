@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>Lo-Jack</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>lojack-favicon.ico">
+  <title>Lo🗲Jack Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+  
+  <meta name="author" content="Federico Iglesias">
+  <meta name="title" property="og:title" content="Lo🗲jack Dashboard">
+  <meta name="description" property="og:description" content="LoJack is a stolen vehicle 🚨 recovery system that is integrated with law 👩‍⚖️⚖️ enforcement, enabling vehicles and equipment to be tracked and recovered by police 🚔👮. The GPS 🛰️ tracking devices installed in trucks 🚚 send data in real time to Lojack servers 📡. This project is the UI Dashboard 📱 that present vehicle data like speed, RPM, Geolocation, etc.">
+  <meta name="url" property="og:url" content="<%= VUE_APP_URL %>">
+  <meta name="type" property="og:type" content="Website">
+  <meta name="image" property="og:image" content="<%= VUE_APP_URL %>/img/logo_meta.jpg">
+
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+      Please enable it to continue.</strong>
+  </noscript>
+  <div id="app"></div>
+</body>
+
 </html>
