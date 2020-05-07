@@ -1,7 +1,8 @@
+
 workbox.core.setCacheNameDetails({prefix: "lojack"})
 
 //Change this value every time before you build
-const LATEST_VERSION = 'v1.1'
+const LATEST_VERSION = 'v1.9'
 
 self.addEventListener('activate', () => {
   console.log(`%c ${LATEST_VERSION} `, 'background: #ddd; color: #0000ff')
@@ -26,9 +27,8 @@ self.addEventListener('activate', () => {
   }
 })
 
-workbox.skipWaiting()
-workbox.clientsClaim()
+workbox.core.skipWaiting()
+workbox.core.clientsClaim()
 
 self.__precacheManifest = [].concat(self.__precacheManifest || [])
-workbox.precaching.suppressWarnings()
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {})

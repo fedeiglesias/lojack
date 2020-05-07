@@ -35,6 +35,8 @@ custom:
             CacheControl: 'no-store, no-cache'
         - service-worker.js:
             CacheControl: 'no-store, no-cache'
+        - manifest.json:
+            CacheControl: 'no-store, no-cache'
   
   scripts:
     hooks:
