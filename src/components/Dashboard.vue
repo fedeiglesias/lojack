@@ -197,7 +197,7 @@ export default {
     }
   },
   beforeCreate() {
-    setInterval(() => this.$store.dispatch("dashboard/getData"), 3000);
+    setInterval(() => this.$store.dispatch("dashboard/getData"), 500);
   }
 };
 </script>
