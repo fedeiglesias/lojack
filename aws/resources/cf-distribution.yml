@@ -1,12 +1,10 @@
-Resources:  
+Resources:
   CFDistribution:
     Type: AWS::CloudFront::Distribution
-    DependsOn:
-      - WebsiteBucket
     Properties:
       DistributionConfig:
         PriceClass: PriceClass_100
-        Aliases: 
+        Aliases:
           - ${self:custom.domain.subdomain}
         Origins:
           - DomainName: ${self:custom.s3Bucket}.s3.amazonaws.com
@@ -19,8 +17,8 @@ Resources:
             ## In case you want to restrict the bucket access use S3OriginConfig and remove CustomOriginConfig
             # S3OriginConfig:
             #   OriginAccessIdentity: origin-access-identity/cloudfront/E127EXAMPLE51Z
-        Enabled: 'true'
-        HttpVersion: 'http2'
+        Enabled: "true"
+        HttpVersion: "http2"
         DefaultRootObject: index.html
         ## Since the Single Page App is taking care of the routing we need to make sure ever path is served with index.html
         ## The only exception are files that actually exist e.h. app.js, reset.css
@@ -41,7 +39,7 @@ Resources:
           TargetOriginId: WebApp
           ## Defining if and how the QueryString and Cookies are forwarded to the origin which in this case is S3
           ForwardedValues:
-            QueryString: 'false'
+            QueryString: "false"
             Cookies:
               Forward: none
           ## The protocol that users can use to access the files in the origin. To allow HTTP use `allow-all`

@@ -1,11 +1,10 @@
 service: lojack
-
-# app and org for use with dashboard.serverless.com
 app: lojack
 org: fedeiglesias
 
+useDotenv: true
+
 plugins:
-  - serverless-pseudo-parameters
   - serverless-plugin-scripts
   - serverless-s3-sync
   - serverless-domain-manager
@@ -13,41 +12,45 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
+  logs:
+    restApi: false
+  lambdaHashingVersion: 20201221
+  apiGateway:
+    shouldStartNameWithService: true
 
 custom:
   domain:
-    # AWS domain id
-    id: 'Z008637234M1UDGEMIGLS'
-    name: pixium.io
-    subdomain: lojack.pixium.io
-    # AWS certificate domain arn
-    certificateArn: arn:aws:acm:us-east-1:989257975727:certificate/af08c4cc-6b8d-4b21-a831-dce800e7001c
+    id: "ZJKMN1QK0FD9S"
+    name: fedeiglesias.com
+    subdomain: lojack.fedeiglesias.com
+    certificateArn: arn:aws:acm:us-east-1:989257975727:certificate/735f4bd6-85db-4cd6-89a2-dcec2bec7d49
 
   # Bucket name
-  s3Bucket: ${self:service.name}-bucket
-  
+  s3Bucket: ${self:service}-bucket-client
+
   s3Sync:
     - bucketName: ${self:custom.s3Bucket}
       localDir: dist
       params:
         - index.html:
-            CacheControl: 'no-store, no-cache'
+            CacheControl: "no-store, no-cache"
         - service-worker.js:
-            CacheControl: 'no-store, no-cache'
+            CacheControl: "no-store, no-cache"
         - manifest.json:
-            CacheControl: 'no-store, no-cache'
-  
+            CacheControl: "no-store, no-cache"
+
   scripts:
     hooks:
       # Recreate API Gateway & Route53 custom domain for API
-      'package:initialize': 'sls delete_domain && sls create_domain'
+      "package:initialize": "sls delete_domain && sls create_domain"
       # Build Client
-      'before:deploy:deploy': npm run build
+      "before:deploy:deploy": npm run build
 
   customDomain:
     domainName: api.${self:custom.domain.subdomain}
-    endpointType: 'regional'
+    autoDomain: true
+    endpointType: "regional"
     securityPolicy: tls_1_2
 
 functions:
@@ -56,10 +59,10 @@ functions:
     memorySize: 128
     description: Get Dashboard data
     events:
-      - http: 
+      - http:
           path: data
           method: get
-          cors: true
+          cors: false
 
 resources:
   - ${file(aws/resources/s3-bucket.yml)}

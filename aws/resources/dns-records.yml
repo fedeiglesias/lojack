@@ -1,15 +1,13 @@
 Resources:
   DnsRecord:
-    Type: 'AWS::Route53::RecordSet'
+    Type: "AWS::Route53::RecordSet"
     DependsOn:
-      - WebsiteBucket
-      - WebsiteBucketPolicy
       - CFDistribution
     Properties:
-      Comment: 'Alias CloudFront for ${self:custom.domain.subdomain}'
+      Comment: "Alias CloudFront for ${self:custom.domain.subdomain}"
       HostedZoneId: ${self:custom.domain.id}
       Type: CNAME
-      TTL: '300'
+      TTL: "300"
       Name: ${self:custom.domain.subdomain}
       ResourceRecords:
-        - '#{CFDistribution.DomainName}'
+        - "Fn::GetAtt": [CFDistribution, DomainName]
